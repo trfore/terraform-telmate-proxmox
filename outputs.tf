@@ -1,4 +1,9 @@
-output "instance_IPv4" {
-  description = "IPv4 of the PVE instances"
-  value       = values(proxmox_vm_qemu.proxmox_vm)[*].default_ipv4_address
+output "id" {
+  description = "Instance VM ID"
+  value       = proxmox_vm_qemu.vm.id
+}
+
+output "public_ipv4" {
+  description = "Instance Public IPv4 Address"
+  value       = proxmox_vm_qemu.vm.default_ipv4_address
 }

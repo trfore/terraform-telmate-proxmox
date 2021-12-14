@@ -1,42 +1,63 @@
-# simple clone of a proxmox template image (e.g. ubuntu-cloud)
-resource "proxmox_vm_qemu" "proxmox_vm" {
-  for_each    = var.proxmox_vm
-  name        = each.value.hostname
-  desc        = each.value.hostname
-  vmid        = each.value.vm_id
-  target_node = each.value.target_node
-  clone       = each.value.img_template
-  full_clone  = false
-  os_type     = "cloud-init"
-  memory      = each.value.memory
-  cores       = each.value.vcpu
-  agent       = 1
-  numa        = true
-
-  disk {
-    type     = "scsi"
-    storage  = "local-lvm"
-    size     = each.value.boot_disk_size
-    iothread = each.value.boot_disk_iothread
-    ssd      = each.value.boot_disk_ssd
-    discard  = each.value.boot_disk_discard
+terraform {
+  required_version = ">=1.0.0"
+  experiments      = [module_variable_optional_attrs]
+  required_providers {
+    proxmox = {
+      source  = "Telmate/proxmox"
+      version = "~> 2.9.0"
+    }
   }
-  scsihw   = "virtio-scsi-pci"
-  bootdisk = "scsi0"
+}
+
+resource "proxmox_vm_qemu" "vm" {
+  target_node = var.node
+  vmid        = var.vm_id
+  name        = var.vm_name
+  desc        = var.description
+  clone       = var.template_name
+  full_clone  = var.full_clone
+  os_type     = var.provisioning_method
+  qemu_os     = var.os_type
+  bios        = var.bios
+  agent       = var.qemu_guest_agent
+  cores       = var.vcpu
+  cpu         = var.vcpu_type
+  memory      = var.memory
+  numa        = var.numa
+  scsihw      = var.scsihw
+  bootdisk    = var.bootdisk
+
+  dynamic "disk" {
+    for_each = var.disks
+    content {
+      type     = disk.value.disk_interface
+      slot     = disk.value.disk_slot
+      storage  = disk.value.disk_storage
+      size     = disk.value.disk_size
+      format   = disk.value.disk_format
+      cache    = disk.value.disk_cache
+      backup   = disk.value.disk_backup
+      iothread = disk.value.disk_iothread
+      ssd      = disk.value.disk_ssd
+      discard  = disk.value.disk_discard
+    }
+  }
 
   tablet = false
 
   network {
-    model  = "virtio"
-    bridge = each.value.vnic_bridge
-    tag    = each.value.vlan_tag
+    model  = var.vnic_model
+    bridge = var.vnic_bridge
+    tag    = var.vlan_tag
   }
 
-  # cloud-init settings
+  # cloud-init config
+  ciuser       = var.ci_user
+  sshkeys      = (var.ci_ssh_key != null ? file("${var.ci_ssh_key}") : null)
   searchdomain = var.ci_dns_domain
   nameserver   = var.ci_dns_server
-  sshkeys      = file("${var.ssh_key_public}")
-  ipconfig0    = "ip=${each.value.ci_ipv4_cidr},gw=${each.value.ci_ipv4_gateway}"
+  ipconfig0    = (var.ci_ipv4_cidr != null ? "ip=${var.ci_ipv4_cidr},gw=${var.ci_ipv4_gateway}" : "ip=dhcp")
+  cicustom     = var.ci_custom_data
 
   # block changing mac address on reapply
   # https://github.com/Telmate/terraform-provider-proxmox/issues/112/
