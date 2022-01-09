@@ -1,71 +1,113 @@
-# Terraform Telmate Proxmox
+# Terraform Telmate Proxmox Modules
 
-## Usage
+This repository contains modules and examples for deploying linux containers and virtual machines on [Proxmox](https://www.proxmox.com/)
+using [Terraform](https://terraform.io) with the [Telmate Proxmox Provider](https://github.com/Telmate/terraform-provider-proxmox).
 
-Create a variable file, `*.tfvars`, and set the variable `proxmox_vm`.
+## Modules
+
+### LXC Container Module
+
+<details>
+  <summary>Code Example: Create A Linux Container</summary>
 
 ```HCL
-proxmox_vm = {
-  "vm-example01" = {
-    vm_id              = 100,
-    hostname           = "vm-example01",
-    target_node        = "pve",
-    img_template       = "ubuntu20",
-    vcpu               = "1",
-    memory             = "1024",
-    boot_disk_size     = "8G",     # str, required
-    boot_disk_iothread = 0,        # int, required
-    boot_disk_ssd      = 0,        # int
-    boot_disk_discard  = "ignore", # "on" = ssd trim
-    ci_ipv4_cidr       = "192.168.1.100/24",
-    ci_ipv4_gateway    = "192.168.1.1",
-    vnic_bridge        = "vmbr0",
-    vlan_tag           = 1
-  }
+module "single_lxc" {
+  source = "github.com/trfore/terraform-telmate-proxmox/modules//lxc"
+
+  node                = "pve"
+  lxc_id              = 100
+  lxc_name            = "lxc-example"
+  description         = "terraform provisioned on ${timestamp()}"
+  os_template         = "local:vztmpl/ubuntu-20.04-standard_20.04-1_amd64.tar.gz"
+  os_type             = "ubuntu"
+  user_ssh_key_public = "~/.ssh/id_ed25519.pub"
+  vlan_tag            = "1"
+  ipv4_address        = "192.168.1.100/24"
+  ipv4_gateway        = "192.168.1.1"
 }
 ```
+
+</details>
+
+<details>
+  <summary>Code Example: Create Multiple Linux Containers</summary>
+
+```HCL
+module "multiple_lxc" {
+  source = "github.com/trfore/terraform-telmate-proxmox/modules//lxc"
+
+  for_each = tomap({
+    "lxc-example-01" = {
+      id = 101
+    },
+    "lxc-example-02" = {
+      id = 102
+    },
+  })
+
+  node                = "pve"
+  lxc_id              = each.value.id
+  lxc_name            = each.key
+  os_template         = "local:vztmpl/ubuntu-20.04-standard_20.04-1_amd64.tar.gz"
+  os_type             = "ubuntu"
+  user_ssh_key_public = "~/.ssh/id_ed25519.pub"
+}
+```
+
+</details>
+
+- See [`examples/lxc`](./examples/lxc/main.tf) for full working examples.
+- See [`modules/lxc/README.md`](./modules/lxc/README.md#inputs) for a list of variables.
+
+### VM Module
+
+<details>
+  <summary>Code Example: Clone A Single VM</summary>
+
+```HCL
+module "single_vm" {
+  source = "github.com/trfore/terraform-telmate-proxmox/modules//vm"
+
+  node          = "pve"
+  vm_id         = 100
+  vm_name       = "vm-example"
+  template_name = "ubuntu20"
+  ci_ssh_key    = "~/.ssh/id_ed25519.pub"
+}
+```
+
+</details>
 
 <details>
   <summary>Code Example: Clone Multiple VMs</summary>
 
 ```HCL
-proxmox_vm = {
-  "vm-example01" = {
-    vm_id              = 101,
-    hostname           = "vm-example01",
-    target_node        = "pve",
-    img_template       = "ubuntu20",
-    vcpu               = "1",
-    memory             = "1024",
-    boot_disk_size     = "8G",     # str, required
-    boot_disk_iothread = 0,        # int, required
-    boot_disk_ssd      = 0,        # int
-    boot_disk_discard  = "ignore", # "on" = ssd trim
-    ci_ipv4_cidr       = "192.168.1.101/24",
-    ci_ipv4_gateway    = "192.168.1.1",
-    vnic_bridge        = "vmbr0",
-    vlan_tag           = 1
-  },
-  "vm-example02" = {
-    vm_id              = 102,
-    hostname           = "vm-example01",
-    target_node        = "pve",
-    img_template       = "ubuntu20",
-    vcpu               = "1",
-    memory             = "1024",
-    boot_disk_size     = "8G",     # str, required
-    boot_disk_iothread = 0,        # int, required
-    boot_disk_ssd      = 0,        # int
-    boot_disk_discard  = "ignore", # "on" = ssd trim
-    ci_ipv4_cidr       = "192.168.1.102/24",
-    ci_ipv4_gateway    = "192.168.1.1",
-    vnic_bridge        = "vmbr0",
-    vlan_tag           = 1
-  }
+module "multiple_vm" {
+  source = "github.com/trfore/terraform-telmate-proxmox/modules//vm"
+
+  for_each = tomap({
+    "vm-multiple-01" = {
+      id       = 101
+      template = "debian10"
+    },
+    "vm-multiple-02" = {
+      id       = 102
+      template = "ubuntu20"
+    },
+  })
+
+  node          = "pve"
+  vm_id         = each.value.id
+  vm_name       = each.key
+  template_name = each.value.template
+  ci_ssh_key    = "~/.ssh/id_ed25519.pub"
 }
 ```
 
 </details>
+
+- See [`examples/vm`](./examples/vm/main.tf) for full working examples.
+- See [`modules/vm/README.md`](./modules/vm/README.md#inputs) for a list of variables.
 
 ## CLI Usage
 
@@ -129,7 +171,7 @@ terraform destroy
 ## State Storage
 
 By default, Terraform stores state information in `terraform.tfstate` file in the local directory.
-The module **does not** define a backend for the state file. Thus, terraform will use the default local
+The modules **do not** define a backend for the state file. Thus, terraform will use the default local
 backend. For additional information on securing state files and configuring different backends, e.g. `s3`, see:
 
 - [Terraform Developer - State]
