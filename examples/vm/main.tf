@@ -15,7 +15,7 @@ provider "proxmox" {
 
 # Create Single VM
 module "vm_minimal_config" {
-  source = "github.com/trfore/terraform-telmate-proxmox/modules//vm"
+  source = "github.com/trfore/terraform-telmate-proxmox//modules/vm"
 
   node          = "pve"                   # required
   vm_id         = 100                     # required
@@ -34,7 +34,7 @@ output "public_ipv4" {
 
 # Create Multiple VMs
 module "vm_multiple_config" {
-  source = "github.com/trfore/terraform-telmate-proxmox/modules//vm"
+  source = "github.com/trfore/terraform-telmate-proxmox//modules/vm"
 
   for_each = tomap({
     "vm-multiple-01" = {
@@ -64,7 +64,7 @@ output "public_ipv4_multiple_vms" {
 
 # Create Single VM with Additional Disks
 module "vm_disk_config" {
-  source = "github.com/trfore/terraform-telmate-proxmox/modules//vm"
+  source = "github.com/trfore/terraform-telmate-proxmox//modules/vm"
 
   node          = "pve"                   # required
   vm_id         = 103                     # required

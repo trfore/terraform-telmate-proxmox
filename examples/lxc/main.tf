@@ -15,7 +15,7 @@ provider "proxmox" {
 
 # Create Single Container
 module "lxc_minimal_config" {
-  source = "github.com/trfore/terraform-telmate-proxmox/modules//lxc"
+  source = "github.com/trfore/terraform-telmate-proxmox//modules/lxc"
 
   node                = "pve"                                                     # Required
   lxc_id              = 100                                                       # Required
@@ -34,7 +34,7 @@ output "mac_address" {
 
 # Create Multiple Containers
 module "lxc_multiple_config" {
-  source = "github.com/trfore/terraform-telmate-proxmox/modules//lxc"
+  source = "github.com/trfore/terraform-telmate-proxmox//modules/lxc"
 
   for_each = tomap({
     "lxc-example-01" = {
@@ -55,7 +55,7 @@ module "lxc_multiple_config" {
 
 # Create Single LXC with Static IP Address
 module "lxc_static_ip_config" {
-  source = "github.com/trfore/terraform-telmate-proxmox/modules//lxc"
+  source = "github.com/trfore/terraform-telmate-proxmox//modules/lxc"
 
   node                = "pve"                                                     # Required
   lxc_id              = 103                                                       # Required
@@ -74,7 +74,7 @@ module "lxc_static_ip_config" {
 
 # Create Single LXC with Additional Mountpoints
 module "vm_mountpoint_config" {
-  source = "github.com/trfore/terraform-telmate-proxmox/modules//lxc"
+  source = "github.com/trfore/terraform-telmate-proxmox//modules/lxc"
 
   node                = "pve"                                                     # Required
   lxc_id              = 104                                                       # Required
