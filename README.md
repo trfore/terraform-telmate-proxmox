@@ -241,6 +241,8 @@ Taylor Fore (<https://github.com/trfore>)
 
 ## References
 
+- [Companion blog post](https://trfore.com/posts/provisioning-proxmox-vms-with-terraform)
+
 ### Terraform
 
 - [Terraform]
