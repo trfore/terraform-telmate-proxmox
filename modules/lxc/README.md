@@ -67,7 +67,7 @@ Example:
 
 ```HCL
 module "lxc_mountpoint_config" {
-  source = "github.com/trfore/terraform-telmate-proxmox/modules//lxc"
+  source = "github.com/trfore/terraform-telmate-proxmox//modules/lxc"
   ...
 
   mountpoint = [

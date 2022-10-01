@@ -63,7 +63,7 @@ Example:
 
 ```HCL
 module "vm_example" {
-  source = "github.com/trfore/terraform-telmate-proxmox/modules//vm"
+  source = "github.com/trfore/terraform-telmate-proxmox//modules/vm"
   ...
 
   disks = [

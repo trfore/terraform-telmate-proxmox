@@ -12,7 +12,7 @@ using [Terraform](https://terraform.io) with the [Telmate Proxmox Provider](http
 
 ```HCL
 module "single_lxc" {
-  source = "github.com/trfore/terraform-telmate-proxmox/modules//lxc"
+  source = "github.com/trfore/terraform-telmate-proxmox//modules/lxc"
 
   node                = "pve"
   lxc_id              = 100
@@ -34,7 +34,7 @@ module "single_lxc" {
 
 ```HCL
 module "multiple_lxc" {
-  source = "github.com/trfore/terraform-telmate-proxmox/modules//lxc"
+  source = "github.com/trfore/terraform-telmate-proxmox//modules/lxc"
 
   for_each = tomap({
     "lxc-example-01" = {
@@ -66,7 +66,7 @@ module "multiple_lxc" {
 
 ```HCL
 module "single_vm" {
-  source = "github.com/trfore/terraform-telmate-proxmox/modules//vm"
+  source = "github.com/trfore/terraform-telmate-proxmox//modules/vm"
 
   node          = "pve"
   vm_id         = 100
@@ -83,7 +83,7 @@ module "single_vm" {
 
 ```HCL
 module "multiple_vm" {
-  source = "github.com/trfore/terraform-telmate-proxmox/modules//vm"
+  source = "github.com/trfore/terraform-telmate-proxmox//modules/vm"
 
   for_each = tomap({
     "vm-multiple-01" = {
