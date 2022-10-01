@@ -4,7 +4,7 @@
 
 | Name        | Version  |
 | ----------- | -------- |
-| [terraform] | >= 1.0.0 |
+| [terraform] | >= 1.3.0 |
 
 ## Providers
 
