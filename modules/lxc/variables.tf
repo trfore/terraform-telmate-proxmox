@@ -93,13 +93,13 @@ variable "disk_size" {
 
 variable "mountpoint" {
   type = list(object({
-    mp         = string
-    mp_size    = string
-    mp_slot    = number
-    mp_key     = string
-    mp_storage = string
-    mp_volume  = optional(string)
-    mp_backup  = optional(bool)
+    mp         = optional(string, "/mnt/local")
+    mp_size    = optional(string, "4G")
+    mp_slot    = optional(number, 0)
+    mp_key     = optional(string, "0")
+    mp_storage = optional(string, "local-lvm")
+    mp_volume  = optional(string, null)
+    mp_backup  = optional(bool, false)
     }
   ))
   default = null
