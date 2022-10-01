@@ -52,16 +52,16 @@
 
 ### Mount Point Variables
 
-| Variable   | Default | Type         | Description                                                              | Required |
-| ---------- | ------- | ------------ | ------------------------------------------------------------------------ | -------- |
-| mountpoint | `null`  | List(Object) | Default will not create mount point, see example below for creating ones | no       |
-| mp         |         | String       | Mount point path inside container, e.g. `/mnt/local`                     | Yes\*    |
-| mp_size    |         | String       | PVE disk size, e.g. `4G`                                                 | Yes\*    |
-| mp_slot    |         | Number       | PVE disk slot for mount point, e.g `0`                                   | Yes\*    |
-| mp_key     |         | String       | PVE disk slot for mount point, e.g. `"0"`                                | Yes\*    |
-| mp_storage |         | String       | PVE storage backend, e.g. `local-lvm`                                    | Yes\*    |
-| mp_volume  |         | String       | Volume, device or directory to mount into the container                  | no       |
-| mp_backup  | `false` | Boolean      | Include mount point in PVE backups                                       | no       |
+| Variable   | Default      | Type         | Description                                                              | Required |
+| ---------- | ------------ | ------------ | ------------------------------------------------------------------------ | -------- |
+| mountpoint | `null`       | List(Object) | Default will not create mount point, see example below for creating ones | no       |
+| mp         | `/mnt/local` | String       | Mount point path inside container, e.g. `/mnt/local`                     | no       |
+| mp_size    | `4G`         | String       | PVE disk size, e.g. `4G`                                                 | no       |
+| mp_slot    | `0`          | Number       | PVE disk slot for mount point, e.g `0`                                   | no       |
+| mp_key     | `0`          | String       | PVE disk slot for mount point, e.g. `"0"`                                | no       |
+| mp_storage | `local-lvm`  | String       | PVE storage backend, e.g. `local-lvm`                                    | no       |
+| mp_volume  | `null`       | String       | Volume, device or directory to mount into the container                  | no       |
+| mp_backup  | `false`      | Boolean      | Include mount point in PVE backups                                       | no       |
 
 Example:
 
