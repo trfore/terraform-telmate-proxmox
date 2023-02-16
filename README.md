@@ -3,6 +3,14 @@
 This repository contains modules and examples for deploying linux containers and virtual machines on [Proxmox](https://www.proxmox.com/)
 using [Terraform](https://terraform.io) with the [Telmate Proxmox Provider](https://github.com/Telmate/terraform-provider-proxmox).
 
+## Requirements
+
+| Name              | Version            |
+| ----------------- | ------------------ |
+| [terraform]       | >= 1.3.0           |
+| [proxmox]         | >= 7.0             |
+| [telmate proxmox] | >= 2.9.0, < 2.9.12 |
+
 ## Modules
 
 ### LXC Container Module
@@ -276,6 +284,8 @@ Taylor Fore (<https://github.com/trfore>)
 
 - [MinIO]
 
+[proxmox]: https://www.proxmox.com/en/
+[telmate proxmox]: https://github.com/Telmate/terraform-provider-proxmox
 [Terraform]: https://www.terraform.io/
 [Terraform - Docs]: https://developer.hashicorp.com/terraform
 [Terraform Developer - State]: https://developer.hashicorp.com/terraform/language/state
