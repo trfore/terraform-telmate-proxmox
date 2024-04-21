@@ -46,18 +46,18 @@
 
 ### Disks Variables
 
-| Variable       | Default     | Type   | Description            | Required |
-| -------------- | ----------- | ------ | ---------------------- | -------- |
-| disk_interface | `scsi`      | String | Disk storage interface | no       |
-| disk_slot      | `0`         | Number | Disk slot number       | no       |
-| disk_storage   | `local-lvm` | String | Disk storage location  | no       |
-| disk_size      | `8G`        | String | Disk size              | no       |
-| disk_format    | `raw`       | String | Disk format            | no       |
-| disk_cache     | `writeback` | String | Disk cache             | no       |
-| disk_backup    | `0`         | Number | Enable disk backup     | no       |
-| disk_iothread  | `0`         | Number | Enable IO threading    | no       |
-| disk_ssd       | `1`         | Number | Enable SSD emulation   | no       |
-| disk_discard   | `on`        | String | Enable TRIM            | no       |
+| Variable      | Default     | Type    | Description           | Required |
+| ------------- | ----------- | ------- | --------------------- | -------- |
+| disk_type     | `disk`      | String  | Disk type             | no       |
+| disk_slot     | `scsi0`     | String  | Disk slot number      | no       |
+| disk_storage  | `local-lvm` | String  | Disk storage location | no       |
+| disk_size     | `8G`        | String  | Disk size             | no       |
+| disk_format   | `raw`       | String  | Disk format           | no       |
+| disk_cache    | `writeback` | String  | Disk cache            | no       |
+| disk_backup   | `false`     | Boolean | Enable disk backup    | no       |
+| disk_iothread | `false`     | Boolean | Enable IO threading   | no       |
+| disk_ssd      | `true`      | Boolean | Enable SSD emulation  | no       |
+| disk_discard  | `true`      | Boolean | Enable TRIM           | no       |
 
 Example:
 

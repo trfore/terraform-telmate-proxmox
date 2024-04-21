@@ -73,25 +73,23 @@ module "vm_disk_config" {
   ci_ssh_key    = "~/.ssh/id_ed25519.pub" # optional, add SSH key to "default" user
   disks = [
     {
-      disk_interface = "scsi"
-      disk_slot      = 0 # default cloud image boot drive
-      disk_storage   = "local-lvm"
-      disk_size      = "8G"
-      disk_format    = "raw"
-      disk_cache     = "writeback"
-      disk_backup    = 1
-      disk_ssd       = 1
-      disk_discard   = "on"
+      disk_slot    = "scsi0" # default cloud image boot drive
+      disk_storage = "local-lvm"
+      disk_size    = "8G"
+      disk_format  = "raw"
+      disk_cache   = "writeback"
+      disk_backup  = true
+      disk_ssd     = true
+      disk_discard = true
     },
     {
-      disk_interface = "scsi" # example add extra disk
-      disk_slot      = 1
-      disk_storage   = "local-lvm"
-      disk_size      = "4G"
-      disk_format    = "raw"
-      disk_cache     = "writeback"
-      disk_ssd       = 1
-      disk_discard   = "on"
+      disk_slot    = "scsi1" # example add extra disk
+      disk_storage = "local-lvm"
+      disk_size    = "4G"
+      disk_format  = "raw"
+      disk_cache   = "writeback"
+      disk_ssd     = true
+      disk_discard = true
     },
   ]
 }

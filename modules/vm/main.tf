@@ -29,16 +29,16 @@ resource "proxmox_vm_qemu" "vm" {
   dynamic "disk" {
     for_each = var.disks
     content {
-      type     = disk.value.disk_interface
-      slot     = disk.value.disk_slot
-      storage  = disk.value.disk_storage
-      size     = disk.value.disk_size
-      format   = disk.value.disk_format
-      cache    = disk.value.disk_cache
-      backup   = disk.value.disk_backup
-      iothread = disk.value.disk_iothread
-      ssd      = disk.value.disk_ssd
-      discard  = disk.value.disk_discard
+      type       = disk.value.disk_type
+      slot       = disk.value.disk_slot
+      storage    = disk.value.disk_storage
+      size       = disk.value.disk_size
+      format     = disk.value.disk_format
+      cache      = disk.value.disk_cache
+      backup     = disk.value.disk_backup
+      iothread   = disk.value.disk_iothread
+      emulatessd = disk.value.disk_ssd
+      discard    = disk.value.disk_discard
     }
   }
 

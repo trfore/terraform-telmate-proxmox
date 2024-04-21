@@ -104,29 +104,29 @@ variable "bootdisk" {
 variable "disks" {
   description = "Terraform object with disk configurations."
   type = list(object({
-    disk_interface = optional(string, "scsi")
-    disk_slot      = optional(number, 0)
-    disk_storage   = optional(string, "local-lvm")
-    disk_size      = optional(string, "8G")
-    disk_format    = optional(string, "raw")
-    disk_cache     = optional(string, "writeback")
-    disk_backup    = optional(number, 0)
-    disk_iothread  = optional(number, 0)
-    disk_ssd       = optional(number, 1)
-    disk_discard   = optional(string, "on")
+    disk_type     = optional(string, "disk")
+    disk_slot     = optional(string, "scsi0")
+    disk_storage  = optional(string, "local-lvm")
+    disk_size     = optional(string, "8G")
+    disk_format   = optional(string, "raw")
+    disk_cache    = optional(string, "writeback")
+    disk_backup   = optional(bool, false)
+    disk_iothread = optional(bool, false)
+    disk_ssd      = optional(bool, true)
+    disk_discard  = optional(bool, true)
     }
   ))
   default = [{
-    disk_interface = "scsi"
-    disk_slot      = 0
-    disk_storage   = "local-lvm"
-    disk_size      = "8G"
-    disk_format    = "raw"
-    disk_cache     = "writeback"
-    disk_backup    = 0
-    disk_iothread  = 0
-    disk_ssd       = 1
-    disk_discard   = "on"
+    disk_type     = "disk"
+    disk_slot     = "scsi0"
+    disk_storage  = "local-lvm"
+    disk_size     = "8G"
+    disk_format   = "raw"
+    disk_cache    = "writeback"
+    disk_backup   = false
+    disk_iothread = false
+    disk_ssd      = true
+    disk_discard  = true
   }]
 }
 
