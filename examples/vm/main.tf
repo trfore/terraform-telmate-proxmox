@@ -93,3 +93,15 @@ module "vm_disk_config" {
     },
   ]
 }
+
+# Create Single VM using UEFI
+module "vm_uefi_config" {
+  source = "github.com/trfore/terraform-telmate-proxmox//modules/vm"
+
+  node          = "pve"                   # required
+  vm_id         = 104                     # required
+  vm_name       = "vm-example-uefi"       # optional
+  template_name = "ubuntu20"              # required
+  bios          = "ovmf"                  # optional, set UEFI bios
+  ci_ssh_key    = "~/.ssh/id_ed25519.pub" # optional, add SSH key to "default" user
+}

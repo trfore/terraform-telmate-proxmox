@@ -130,6 +130,18 @@ variable "disks" {
   }]
 }
 
+variable "efi_disk_storage" {
+  description = "EFI disk storage location."
+  type        = string
+  default     = "local-lvm"
+}
+
+variable "efi_disk_type" {
+  description = "EFI disk OVMF firmware version."
+  type        = string
+  default     = "4m"
+}
+
 ### Network Variables
 variable "vnic_model" {
   description = "Networking adapter model, e.g. 'virtio'."

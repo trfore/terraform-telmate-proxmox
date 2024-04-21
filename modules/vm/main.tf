@@ -42,7 +42,13 @@ resource "proxmox_vm_qemu" "vm" {
     }
   }
 
-  tablet = false
+  dynamic "efidisk" {
+    for_each = (var.bios == "ovmf" ? [1] : [])
+    content {
+      efitype = var.efi_disk_type
+      storage = var.efi_disk_storage
+    }
+  }
 
   network {
     model  = var.vnic_model

@@ -24,7 +24,7 @@
 | full_clone          | `true`            | Boolean      | Create a full independent clone; setting to `false` will create a linked clone           | no       |
 | provisioning_method | `cloud-init`      | String       | Telmate provider provisioning method - options: `ubuntu`, `centos`, or `cloud-init`      | no       |
 | os_type             | `l26`             | String       | QEMU OS type, e.g. `l26` for Linux 6.x - 2.6 kernel                                      | no       |
-| bios                | `seabios`         | String       | VM bios                                                                                  | no       |
+| bios                | `seabios`         | String       | VM bios, setting to `ovmf` will automatically create a EFI disk                          | no       |
 | qemu_guest_agent    | `1`               | Number       | Enable QEMU guest agent                                                                  | no       |
 | vcpu                | `1`               | Number       | Number of CPU cores                                                                      | no       |
 | vcpu_type           | `host`            | String       | CPU type                                                                                 | no       |
@@ -33,6 +33,8 @@
 | scsihw              | `virtio-scsi-pci` | String       | Storage controller, e.g. `virtio-scsi-pci`                                               | no       |
 | bootdisk            | `scsi0`           | String       | Boot disk                                                                                | no       |
 | disks               | See below         | List(Object) | See [disks variables](#disks-variables) below                                            | no       |
+| efi_disk_storage    | `local-lvm`       | String       | EFI disk storage location                                                                | no       |
+| efi_disk_type       | `4m`              | String       | EFI disk OVMF firmware version                                                           | no       |
 | vnic_model          | `virtio`          | String       | Networking adapter model, e.g. `virtio`                                                  | no       |
 | vnic_bridge         | `vmbr0`           | String       | Networking adapter dridge, e.g. `vmbr0`                                                  | no       |
 | vlan_tag            | `1`               | Number       | Networking adapter VLAN tag                                                              | no       |
