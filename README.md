@@ -5,11 +5,11 @@ using [Terraform](https://terraform.io) with the [Telmate Proxmox Provider](http
 
 ## Requirements
 
-| Name              | Version            |
-| ----------------- | ------------------ |
-| [terraform]       | >= 1.3.0           |
-| [proxmox]         | >= 7.0, < 8.0      |
-| [telmate proxmox] | >= 2.9.0, < 2.9.12 |
+| Name              | Version  |
+| ----------------- | -------- |
+| [terraform]       | >= 1.3.0 |
+| [proxmox]         | >= 8.0   |
+| [telmate proxmox] | >= 3.0.0 |
 
 ## Modules
 
