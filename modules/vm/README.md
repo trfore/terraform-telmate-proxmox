@@ -30,6 +30,7 @@
 | vcpu_type           | `host`            | String       | CPU type                                                                                 | no       |
 | memory              | `1024`            | Number       | Memory size in `MiB`                                                                     | no       |
 | numa                | `false`           | Boolean      | Emulate NUMA architecture                                                                | no       |
+| tablet              | `false`           | Boolean      | Enable tablet for pointer                                                                | no       |
 | scsihw              | `virtio-scsi-pci` | String       | Storage controller, e.g. `virtio-scsi-pci`                                               | no       |
 | bootdisk            | `scsi0`           | String       | Boot disk                                                                                | no       |
 | disks               | See below         | List(Object) | See [disks variables](#disks-variables) below                                            | no       |
@@ -38,6 +39,7 @@
 | vnic_model          | `virtio`          | String       | Networking adapter model, e.g. `virtio`                                                  | no       |
 | vnic_bridge         | `vmbr0`           | String       | Networking adapter dridge, e.g. `vmbr0`                                                  | no       |
 | vlan_tag            | `1`               | Number       | Networking adapter VLAN tag                                                              | no       |
+| ci_cdrom_storage    | `local-lvm`       | String       | Storage location for cloud-init config drive, e.g. `local-lvm`                           | no       |
 | ci_user             | `null`            | String       | Cloud-init 'default' user                                                                | no       |
 | ci_ssh_key          | `null`            | String       | File path to SSH key for 'default' user, e.g. `~/.ssh/id_ed25519.pub`                    | no       |
 | ci_dns_domain       | `null`            | String       | DNS domain name, e.g. `example.com`. Default `null` value will use PVE host settings     | no       |

@@ -88,6 +88,12 @@ variable "numa" {
   default     = false
 }
 
+variable "tablet" {
+  description = "Enable tablet for pointer."
+  type        = bool
+  default     = false
+}
+
 ### Disk Variables
 variable "scsihw" {
   description = "Storage controller, e.g. 'virtio-scsi-pci'."
@@ -162,6 +168,12 @@ variable "vlan_tag" {
 }
 
 ### Cloud-init Variables
+variable "ci_cdrom_storage" {
+  description = "Storage location for cloud-init config drive, e.g. `local-lvm`."
+  type        = string
+  default     = "local-lvm"
+}
+
 variable "ci_user" {
   description = "Cloud-init 'default' user."
   type        = string

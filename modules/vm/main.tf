@@ -23,6 +23,7 @@ resource "proxmox_vm_qemu" "vm" {
   cpu         = var.vcpu_type
   memory      = var.memory
   numa        = var.numa
+  tablet      = var.tablet
   scsihw      = var.scsihw
   bootdisk    = var.bootdisk
 
@@ -57,12 +58,13 @@ resource "proxmox_vm_qemu" "vm" {
   }
 
   # cloud-init config
-  ciuser       = var.ci_user
-  sshkeys      = (var.ci_ssh_key != null ? file("${var.ci_ssh_key}") : null)
-  searchdomain = var.ci_dns_domain
-  nameserver   = var.ci_dns_server
-  ipconfig0    = (var.ci_ipv4_cidr != null ? "ip=${var.ci_ipv4_cidr},gw=${var.ci_ipv4_gateway}" : "ip=dhcp")
-  cicustom     = var.ci_custom_data
+  cloudinit_cdrom_storage = var.ci_cdrom_storage
+  ciuser                  = var.ci_user
+  sshkeys                 = (var.ci_ssh_key != null ? file("${var.ci_ssh_key}") : null)
+  searchdomain            = var.ci_dns_domain
+  nameserver              = var.ci_dns_server
+  ipconfig0               = (var.ci_ipv4_cidr != null ? "ip=${var.ci_ipv4_cidr},gw=${var.ci_ipv4_gateway}" : "ip=dhcp")
+  cicustom                = var.ci_custom_data
 
   # block changing mac address on reapply
   # https://github.com/Telmate/terraform-provider-proxmox/issues/112/
