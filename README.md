@@ -11,6 +11,64 @@ using [Terraform](https://terraform.io) with the [Telmate Proxmox Provider](http
 | [proxmox]         | >= 8.0   |
 | [telmate proxmox] | >= 3.0.0 |
 
+## Telmate Provider: Build the Plugin
+
+Currently, the revised [`disk` block](https://github.com/Telmate/terraform-provider-proxmox/issues/986) is only
+available in the ['new-disk' branch](https://github.com/telmate/terraform-provider-proxmox/tree/new-disk). To build the
+plugin, you will need to have [Go](https://golang.org/) and [GNU make](https://www.gnu.org/software/make/) installed on
+your machine. After that, you can run the following commands to build and install the plugin:
+
+```bash
+# clone the repo
+git clone https://github.com/Telmate/terraform-provider-proxmox
+cd terraform-provider-proxmox
+# change the branch
+git checkout new-disk
+
+# build the binary
+make
+```
+
+To use the binary, you will need to move it into the plugins directory, `~/.terraform.d/plugins` (Unix) or
+`%APPDATA%\terraform.d\plugins` (Windows). For practicality's sake, the following code will name it `3.0.1`, however,
+this is not an official release.
+
+```bash
+# move the binary into the terraform plugins directory
+VERSION='3.0.1'
+
+mkdir -p ~/.terraform.d/plugins/registry.terraform.io/telmate/proxmox/"${VERSION}"/linux_amd64/
+
+cp bin/terraform-provider-proxmox ~/.terraform.d/plugins/registry.terraform.io/telmate/proxmox/"${VERSION}"/linux_amd64/terraform-provider-proxmox_v"${VERSION}"
+```
+
+Update your terraform files to use the new binary:
+
+```HCL
+terraform {
+  required_providers {
+    proxmox = {
+      source  = "Telmate/proxmox"
+      version = "3.0.1"
+    }
+  }
+}
+```
+
+And to use this repo's modules, set the source to:
+
+```HCL
+module "vm" {
+  source = "github.com/trfore/terraform-telmate-proxmox//modules/vm?ref=v3"
+  ...
+}
+
+module "lxc" {
+  source = "github.com/trfore/terraform-telmate-proxmox//modules/lxc?ref=v3"
+  ...
+}
+```
+
 ## Modules
 
 ### LXC Container Module
