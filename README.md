@@ -215,22 +215,23 @@ terraform {
 
 ## Proxmox API Token
 
-### Minimal Permission Requirements
+### Permission Requirements
 
-- Note: the providers documentation suggest semi-broad permissions at the root path `/`, these modules works with fewer
-  permissions and only needs the following paths: `/storage`, `/vms`
+Note: Provider requires broad permissions at the root path `/`.
 
 ```bash
 # create role
-pveum role add TerraformUser -privs "Datastore.AllocateSpace Datastore.Audit VM.Allocate VM.Audit VM.Clone VM.Config.CDROM VM.Config.CPU VM.Config.Cloudinit VM.Config.Disk VM.Config.HWType VM.Config.Memory VM.Config.Network VM.Config.Options VM.Monitor VM.PowerMgmt"
+pveum role add TerraformUser -privs "Datastore.AllocateSpace Datastore.Audit \
+  Pool.Allocate SDN.Use Sys.Audit Sys.Console Sys.Modify VM.Allocate VM.Audit \
+  VM.Clone VM.Config.CDROM VM.Config.Cloudinit VM.Config.CPU VM.Config.Disk \
+  VM.Config.HWType VM.Config.Memory VM.Config.Network VM.Config.Options \
+  VM.Migrate VM.Monitor VM.PowerMgmt"
 
 # create group
 pveum group add terraform-users
 
 # add permissions
-pveum acl modify /storage -group terraform-users -role TerraformUser
-
-pveum acl modify /vms -group terraform-users -role TerraformUser
+pveum acl modify / -group terraform-users -role TerraformUser
 
 # create user 'terraform'
 pveum useradd terraform@pve -groups terraform-users
