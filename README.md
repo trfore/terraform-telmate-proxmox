@@ -11,6 +11,8 @@ using [Terraform](https://terraform.io) with the [Telmate Proxmox Provider](http
 | [proxmox]         | >= 7.0, < 8.0      |
 | [telmate proxmox] | >= 2.9.0, < 2.9.12 |
 
+**For PVE 8 Support Checkout the [V3 branch](https://github.com/trfore/terraform-telmate-proxmox/tree/v3)**
+
 ## Modules
 
 ### LXC Container Module
