@@ -1,6 +1,7 @@
 ## Local Testing Files
 *.secret*
 *.private*
+.venv
 
 ## Terraform Ignore
 # Local .terraform directories
