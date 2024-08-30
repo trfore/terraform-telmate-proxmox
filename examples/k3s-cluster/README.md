@@ -1,7 +1,7 @@
 # Example Code
 
-- This code will create a three node K3s cluster, the nodes are configured using the recommended `2` vcpus and `4096` MB of
-  ram for a [small deployment]. The default network CNI (Flannel), datastore (sqlite3), and settings are used.
+- This code will create a three node K3s cluster, the nodes are configured using the recommended `2` vcpus and `4096` MB
+  of ram for a [small deployment]. The default network CNI (Flannel), datastore (sqlite3), and settings are used.
 - Companion code to [the blog post (link)].
 
 ## Usage

@@ -328,16 +328,16 @@ Taylor Fore (<https://github.com/trfore>)
 
 ### Secrets Management
 
-- https://bitwarden.com/download/
-- https://bitwarden.com/help/cli/
-- https://github.com/bitwarden/clients
-- https://www.vaultproject.io/
-- https://developer.hashicorp.com/vault/docs
+- <https://bitwarden.com/download/>
+- <https://bitwarden.com/help/cli/>
+- <https://github.com/bitwarden/clients>
+- <https://www.vaultproject.io/>
+- <https://developer.hashicorp.com/vault/docs>
 
 ### Proxmox
 
-- Proxmox VE API: https://pve.proxmox.com/wiki/Proxmox_VE_API
-- Proxmox User Management: https://pve.proxmox.com/pve-docs/chapter-pveum.html
+- Proxmox VE API: <https://pve.proxmox.com/wiki/Proxmox_VE_API>
+- Proxmox User Management: <https://pve.proxmox.com/pve-docs/chapter-pveum.html>
 
 ### Other
 
