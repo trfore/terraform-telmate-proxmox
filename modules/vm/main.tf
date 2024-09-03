@@ -43,6 +43,16 @@ resource "proxmox_vm_qemu" "vm" {
     }
   }
 
+  # cloud-init configuration drive
+  dynamic "disk" {
+    for_each = (var.provisioning_method == "cloud-init" ? [1] : [])
+    content {
+      type    = "cloudinit"
+      slot    = var.ci_drive_slot
+      storage = var.ci_drive_storage
+    }
+  }
+
   dynamic "efidisk" {
     for_each = (var.bios == "ovmf" ? [1] : [])
     content {
@@ -58,13 +68,14 @@ resource "proxmox_vm_qemu" "vm" {
   }
 
   # cloud-init config
-  cloudinit_cdrom_storage = var.ci_cdrom_storage
-  ciuser                  = var.ci_user
-  sshkeys                 = (var.ci_ssh_key != null ? file("${var.ci_ssh_key}") : null)
-  searchdomain            = var.ci_dns_domain
-  nameserver              = var.ci_dns_server
-  ipconfig0               = (var.ci_ipv4_cidr != null ? "ip=${var.ci_ipv4_cidr},gw=${var.ci_ipv4_gateway}" : "ip=dhcp")
-  cicustom                = var.ci_custom_data
+  ciuser       = var.ci_user
+  cipassword   = var.ci_password
+  ciupgrade    = var.ci_upgrade_packages
+  sshkeys      = (var.ci_ssh_key != null ? file("${var.ci_ssh_key}") : null)
+  searchdomain = var.ci_dns_domain
+  nameserver   = var.ci_dns_server
+  ipconfig0    = (var.ci_ipv4_cidr != null ? "ip=${var.ci_ipv4_cidr},gw=${var.ci_ipv4_gateway}" : "ip=dhcp")
+  cicustom     = var.ci_custom_data
 
   # block changing mac address on reapply
   # https://github.com/Telmate/terraform-provider-proxmox/issues/112/

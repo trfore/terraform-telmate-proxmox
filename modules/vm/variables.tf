@@ -168,7 +168,13 @@ variable "vlan_tag" {
 }
 
 ### Cloud-init Variables
-variable "ci_cdrom_storage" {
+variable "ci_drive_slot" {
+  description = "Slot for cloud-init config drive, e.g. `ide2`."
+  type        = string
+  default     = "ide2"
+}
+
+variable "ci_drive_storage" {
   description = "Storage location for cloud-init config drive, e.g. `local-lvm`."
   type        = string
   default     = "local-lvm"
@@ -178,6 +184,18 @@ variable "ci_user" {
   description = "Cloud-init 'default' user."
   type        = string
   default     = null
+}
+
+variable "ci_password" {
+  description = "Cloud-init 'default' user password."
+  type        = string
+  default     = null
+}
+
+variable "ci_upgrade_packages" {
+  description = "Upgrade packages via Cloud-init."
+  type        = bool
+  default     = true
 }
 
 variable "ci_ssh_key" {
