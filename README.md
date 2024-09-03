@@ -306,40 +306,48 @@ See [LICENSE](LICENSE) for more information.
 
 Taylor Fore (<https://github.com/trfore>)
 
+### Additional Modules, Templates & Tools
+
+| Github Repo                 | Description                                                            |
+| --------------------------- | ---------------------------------------------------------------------- |
+| [packer-proxmox-templates]  | Collection of Packer Templates for Proxmox                             |
+| [proxmox-template-scripts]  | Collection of Bash Scripts to Download Images and Create PVE Templates |
+| [terraform-bpg-proxmox]     | Terraform Modules for the BPG Proxmox Provider                         |
+| [terraform-telmate-proxmox] | Terraform Modules for the Telmate Proxmox Provider                     |
+
 ## References
 
 - [Companion blog post](https://trfore.com/posts/provisioning-proxmox-vms-with-terraform)
 
-### Terraform
+Terraform:
 
 - [Terraform]
 - [Terraform - Docs]
 
-### Terraform Provider - Proxmox
+Terraform Provider - Proxmox:
 
 - [Telemate/Proxmox - Docs]
 - [Telemate/Proxmox - Github]
 
-### Terraform State File Management & Storage
+Terraform State File Management & Storage:
 
 - [Terraform Developer - State]
 - [Terraform Developer - State Backends]
 - [Terraform Developer - Backend Configuration]
 
-### Secrets Management
+Secrets Management:
 
 - <https://bitwarden.com/download/>
 - <https://bitwarden.com/help/cli/>
 - <https://github.com/bitwarden/clients>
-- <https://www.vaultproject.io/>
 - <https://developer.hashicorp.com/vault/docs>
 
-### Proxmox
+Proxmox:
 
 - Proxmox VE API: <https://pve.proxmox.com/wiki/Proxmox_VE_API>
 - Proxmox User Management: <https://pve.proxmox.com/pve-docs/chapter-pveum.html>
 
-### Other
+Other:
 
 - [MinIO]
 
@@ -353,3 +361,7 @@ Taylor Fore (<https://github.com/trfore>)
 [Telemate/Proxmox - Docs]: https://registry.terraform.io/providers/Telmate/proxmox/latest/docs
 [Telemate/Proxmox - Github]: https://github.com/Telmate/terraform-provider-proxmox
 [MinIO]: https://min.io/
+[packer-proxmox-templates]: https://github.com/trfore/packer-proxmox-templates
+[proxmox-template-scripts]: https://github.com/trfore/proxmox-template-scripts
+[terraform-bpg-proxmox]: https://github.com/trfore/terraform-bpg-proxmox
+[terraform-telmate-proxmox]: https://github.com/trfore/terraform-telmate-proxmox
